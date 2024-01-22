@@ -30,9 +30,12 @@ This project is licensed under the [${license}](https://opensource.org/licenses/
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
+  console.log('Data received:', data); 
   const licenseBadge = renderLicenseBadge(data.license);
+  console.log('License badge:', licenseBadge);
   const licenseSection = renderLicenseSection(data.license);
-  return `# ${data.title} ${licenseBadge}
+
+  const readmeContent = `# ${data.title} ${licenseBadge}
 
   ## Description
 
@@ -67,11 +70,12 @@ ${data.tests}
 
 ## Questions
 
-If you have any questions, feel free to reach out to me:
+If you have any questions, you can reach me at:
 
 - GitHub: [${data.github}](https://github.com/${data.github})
 - Email: [${data.email}](mailto:${data.email})
 `;
+return readmeContent;
 }
 
 module.exports = generateMarkdown;
