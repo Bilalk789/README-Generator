@@ -6,29 +6,37 @@ const questions = [
     {
         type: 'input',
         name: 'projectTitle',
-        message: 'What is the title of your project?',
-      },
+        message: 'Enter your project title:',
+    }
 ];
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-    function writeToFile(fileName, data) {
-        fs.writeFile(fileName, data, (err) =>
-          err ? console.error(err) : console.log('top tier README.md generated!')
-        );
-      }
-
+    fs.writeFile(fileName, data, (err) => {
+        if (err) {
+            console.error(err);
+        } else {
+            console.log(`README file (${fileName}) successfully generated.`);
+        }
+    });
 }
 
+
+module.exports = writeToFile;
 // TODO: Create a function to initialize app
 function init() {
-inquirer.prompt(questions).then((answers) => {
-    // Generate README content based on user answers
-    const readmeContent = generateReadme(answers);
+    // Use inquirer.prompt to ask questions and collect user input
+    inquirer.prompt(questions).then((userData) => {
+        // Generate the README content based on user input (replace this with your logic)
+        const readmeContent = `# ${userData.projectTitle}\n\n...`;
 
-    // Write the README file
-    writeToFile('README.md', readmeContent);
-  });
+        // Specify the README file name
+        const fileName = 'README.md';
+
+        // Write the README file
+        writeToFile(fileName, readmeContent);
+    });
 }
+
 // Function call to initialize app
 init();
